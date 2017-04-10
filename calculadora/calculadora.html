@@ -1,0 +1,43 @@
+
+<!-- File: chapter2/hello-controller.html -->
+<html ng-app="calculadoraApp">
+<head>
+    <title>List App</title>
+    <style>
+        table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 1em;
+    }
+
+    </style>
+</head>
+<body ng-controller="MainCtrl as ctrl">
+
+    <input ng-model="ctrl.Calc.valor_1" type="number">
+
+    <select 
+        ng-options="operacao as operacao.operador for operacao in ctrl.operacoes track by operacao.id" 
+        ng-model="ctrl.Calc.operacao_selecionada">
+        <option value="">Selecione</option>
+    </select>
+
+    <input ng-model="ctrl.Calc.valor_2" type="number">
+    <strong>=</strong>
+    <input ng-model="ctrl.resultado" type="number">
+
+    <button ng-click="ctrl.calcular(ctrl.Calc)">Calcular</button>
+
+<script
+  src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.js">
+</script>
+<script
+  src="https://code.angularjs.org/1.6.3/i18n/angular-locale_pt-br.js">
+</script>
+
+<script
+  src="calculadora.js">
+</script>
+
+</body>
+</html>
