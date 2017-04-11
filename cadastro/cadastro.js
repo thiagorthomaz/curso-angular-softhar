@@ -1,5 +1,18 @@
-angular.module('cadastroApp', [])
-.controller('MainCtrl', [function() {
+angular.module('cadastroApp', []).
+controller('MainCtrl', [function() {
+    var self = this;
+    self.tab = 'cadastrar';
+    self.open = function(tab) {
+        self.tab = tab;
+    };
+}]).
+controller('ListarCtrl', function(CadastroAPI) {
+    var self = this;
+    
+    self.cadastros = CadastroAPI.listar();
+    
+})
+.controller('CadastroCtrl', function(CadastroAPI) {
     var self = this;
 
     self.listaEstados = [
@@ -10,6 +23,10 @@ angular.module('cadastroApp', [])
 
     self.submit = function() {
         console.log('User clicked submit with ', self.user);
+
+        CadastroAPI.add(self.user);
+        console.log(CadastroAPI.listar());
+
     };
 
     self.CEPValido = function(_cep_){
@@ -32,4 +49,19 @@ angular.module('cadastroApp', [])
         return strTexto.replace(/^s+|s+$/g, '');
     }
 
-}]);
+}).service('CadastroAPI', function(){
+
+    _lista = new Array();
+
+    _lista.push({nome: "Thiago", endereco: {cep:"82310030",logradouro:"Rua",numero:176}} );
+
+    this.add = function(_user_){
+        _lista.push(_user_);
+    }
+
+    this.listar = function(){
+        return _lista;
+    }
+    
+
+});
