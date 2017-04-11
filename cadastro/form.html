@@ -1,0 +1,131 @@
+<!-- File: chapter4/simple-form.html -->
+<html ng-app="cadastroApp">
+<head>
+    <title>Cadastro App</title>
+
+    <style>
+        label {
+            display:block;
+            padding-top:10px; 
+        }
+
+        input.submit {
+            padding:10px;
+            margin-top: 10px;
+        }
+
+        .erro {
+            color: red;
+        }
+
+
+    </style>
+</head>
+<body ng-controller="MainCtrl as ctrl">
+
+<form ng-submit="ctrl.submit()" name="form">
+
+    <div>
+
+        <label for="nome" >Nome</label>
+        <input type="text"
+            name="nome"
+            ng-model="ctrl.user.nome" 
+            ng-minlength="3"
+            required
+         >
+         
+        <span ng-show="form.nome.$error.required && form.nome.$dirty" class="erro">
+            Campo obrigatorio
+        </span >
+        
+        <span ng-show="form.nome.$error.minlength" class="erro">
+            Tamanho minimo de 3 caracteres
+        </span>
+
+    </div>
+    
+    <div>
+        <label for="cep" >CEP</label>
+        <input 
+            name="cep"
+            type="text" 
+            ng-model="ctrl.user.endereco.cep"
+            ng-minlength="8"
+            required
+        >
+        <span ng-show="form.cep.$error.required && form.nome.$dirty" class="erro">
+            Campo obrigatorio
+        </span >
+
+        <span ng-show="form.cep.$error.minlength" class="erro">
+            Tamanho minimo de 8 caracteres
+        </span >
+        
+
+    </div>
+
+    <div>
+        <label for="logradouro" >Logradouro</label>
+        <input 
+            name="logradouro"
+            type="text" 
+            ng-model="ctrl.user.endereco.logradouro"
+            ng-minlength="3"
+            required
+        >
+        <span ng-show="form.logradouro.$error.required && form.nome.$dirty" class="erro">
+            Campo obrigatorio
+        </span >
+
+        <span ng-show="form.logradouro.$error.minlength" class="erro">
+            Tamanho minimo de 3 caracteres
+        </span >
+    </div>
+
+    <div>
+        <label for="numero" >Numero</label>
+        <input name="numero" type="number" ng-model="ctrl.user.endereco.numero" required>
+        <span ng-show="form.numero.$error.required && form.nome.$dirty" class="erro">
+            Campo obrigatorio
+        </span >
+    </div>
+
+    <div>
+        <label for="complemento" >Complemento</label>
+        <input type="text" ng-model="ctrl.user.endereco.complemento">
+    </div>
+
+    <div>
+        <label for="bairro" >Bairro</label>
+        <input type="text" ng-model="ctrl.user.endereco.bairro">
+    </div>
+
+    <div>
+        <label for="localidade" >Localidade</label>
+        <input type="text" ng-model="ctrl.user.endereco.localidade">
+    </div>
+
+    <div>
+        <label for="uf" >UF</label>
+        <select ng-model="ctrl.user.endereco.uf" ng-options="e.uf for e in ctrl.listaEstados">
+            <option value="">Selecione UF</option>
+        </select>
+        
+    </div>
+
+
+    <input 
+        type="submit" 
+        class="submit" 
+        value="Submit"
+        ng-disabled="form.$invalid"
+    >
+</form>
+
+<script
+  src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.js">
+</script>
+<script type="text/javascript" src="cadastro.js"></script>
+</body>
+</html>
