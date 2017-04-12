@@ -39,9 +39,51 @@
         Listar cadastrados
     </button>
 
+    <button ng-click="mainCtrl.open('consultar_cep')">
+        Consultar CEP
+    </button>
 
     <div ng-switch="mainCtrl.tab">
-        
+
+        <div ng-switch-when="consultar_cep">
+            <div ng-controller="ConsultarCEPCtrl as ctrl">
+
+                <h1>Consulta CEP</h1>
+
+                <input type="text" name="cep" ng-model="ctrl.cep">
+                
+                <button ng-click="ctrl.consultar(ctrl.cep)">Consultar</button>
+
+                <h2>Resultado</h2>
+
+
+
+                <table>
+                    <thead>
+                        <th>CEP</th>
+                        <th>Logradouro</th>
+                        <th>Complemento</th>
+                        <th>Bairro</th>
+                        <th>Localidade</th>
+                        <th>UF</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ctrl.dados.cep}}</td>
+                            <td>{{ctrl.dados.logradouro}}</td>
+                            <td>{{ctrl.dados.complemento}}</td>
+                            <td>{{ctrl.dados.bairro}}</td>
+                            <td>{{ctrl.dados.localidade}}</td>
+                            <td>{{ctrl.dados.uf}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+            
+        </div>
+
         <div ng-switch-when="listar">
             <div ng-controller="ListarCtrl as ctrl">
 
@@ -182,8 +224,12 @@
 </div>    
 
     <script
-    src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.js">
+    src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js">
     </script>
+    <script
+    src="https://code.angularjs.org/1.6.3/angular-resource.min.js">
+    </script>
+    
     <script type="text/javascript" src="cadastro.js"></script>
 </body>
 </html>

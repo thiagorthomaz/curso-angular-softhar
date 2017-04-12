@@ -14,13 +14,21 @@ module.exports = function(config) {
 
 
     // list of files / patterns to load in the browser
+    /*files: [
+      'https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js',
+      'https://code.angularjs.org/1.6.3/angular-resource.min.js',
+      'https://code.angularjs.org/1.6.3/angular-mocks.js',
+      'teste.js',
+      'cadastro.js'
+    ],*/
+
     files: [
       'angular.min.js',
+      'resource.js',
       'angular-mocks.js',
       'teste.js',
       'cadastro.js'
     ],
-
 
     // list of files to exclude
     exclude: [

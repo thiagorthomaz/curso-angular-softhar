@@ -1,4 +1,4 @@
-angular.module('cadastroApp', []).
+angular.module('cadastroApp', ['ngResource']).
 controller('MainCtrl', [function() {
     var self = this;
     self.tab = 'cadastrar';
@@ -10,6 +10,26 @@ controller('ListarCtrl', function(CadastroAPI) {
     var self = this;
     
     self.cadastros = CadastroAPI.listar();
+    
+}).
+controller('ConsultarCEPCtrl', function(ConsultarCEPAPI) {
+    var self = this;
+    
+    self.consultar = function(_cep_){
+        ConsultarCEPAPI.get({cep : _cep_}, function(r) {
+            self.dados = r;
+            return r;
+        });
+    }
+
+})
+.service('ConsultarCEPAPI', function($resource) {
+
+    return $resource("https://viacep.com.br/ws/:cep/json/", { cep: "@cep" }, {
+      get: {method: 'GET', cache: false, isArray: false}
+    });
+
+    
     
 })
 .controller('CadastroCtrl', function(CadastroAPI) {
@@ -33,9 +53,6 @@ controller('ListarCtrl', function(CadastroAPI) {
         var _exp = RegExp("^[0-9]{2}.[0-9]{3}-[0-9]{3}$");
         var _cep_limpo = trim(_cep_);
         
-        console.log(_cep_limpo);
-        console.log(_exp.test(_cep_limpo));
-
         if ((_cep_limpo.length > 0) && _exp.test(_cep_limpo) ) {
             return true;
         } else {
